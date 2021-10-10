@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScanMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:id="@+id/surface_camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <TextView
+                android:id="@+id/text_scan_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/text_scan_result" />
+
+            <TextView
+                android:id="@+id/text_can_eat_or_not"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_scan_result"
+                android:layout_marginTop="15dp"
+                android:textColor="#5CB85C"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@string/text_can_eat_or_not" />
+
+            <TextView
+                android:id="@+id/textView_ok_btn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/text_can_eat_or_not"
+                android:layout_marginTop="15dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/button_background_color"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/text_ok"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
