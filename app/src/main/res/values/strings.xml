@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Nutrition Scanning</string>
+    <string name="text_welcome">Welcome</string>
+    <string name="text_login_con">Login to continue</string>
+    <string name="text_email">Email</string>
+    <string name="text_password">Password</string>
+    <string name="text_password_conf">Confirm Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_new_user">New User? Register Now</string>
+    <string name="text_or">OR</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="textview_name">Name</string>
+    <string name="text_reg">REGISTER(part1)</string>
+    <string name="text_reg2">REGISTER(part2)</string>
+    <string name="text_first_name">First Name</string>
+    <string name="text_lastname">Last Name</string>
+    <string name="text_create_account">CREATE ACCOUNT</string>
+    <string name="text_cancel">CANCEL</string>
+    <string name="text_question_head">Have you had any diseases?</string>
+    <string name="text_question_tooltip">please choose accordingly. Can choose more then 1 answer.</string>
+    <string name="text_diabetes">Diabetes</string>
+    <string name="text_hbp">high blood pressure</string>
+    <string name="text_nut_allergy">Nut allergy</string>
+    <string name="text_seafood_allergy">seafood allergy</string>
+    <string name="text_ok">OK</string>
+    <string name="text_no_name_data">NO NAME DATA</string>
+    <string name="text_edit_personal_details">Edit Personal Details</string>
+    <string name="text_profiles">Profile</string>
+    <string name="text_edit_profile">Edit Profile</string>
+    <string name="text_change_password">Change Password</string>
+    <string name="text_others">Others</string>
+    <string name="text_change_diseases">Change Diseases</string>
+    <string name="text_edit_username">Edit Username</string>
+    <string name="text_edit_email">Edit Email</string>
+    <string name="text_manage_user_account">Manage User Account</string>
+    <string name="text_delete_account">Delete Account</string>
+    <string name="text_confirm_change">Confirm Change</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_scan">Scan</string>
+    <string name="text_history">History</string>
+    <string name="text_settings">Settings</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="third_fragment_label">Third Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="text_input_field_all">Please input all field.</string>
+    <!-- Strings used for ScanMainActivity -->
+    <string name="text_scan_result">Scan Result</string>
+    <string name="text_can_eat_or_not">No Result</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="text_failed_to_update">Failed to Update</string>
+    <string name="text_successfully_to_updated">Successfully to Updated</string>
+</resources>
