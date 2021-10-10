@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.thanabordeedev.nutritionscanning">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NutritionScanning">
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.EditDiseasesActivity"
+            android:exported="true"
+            android:label="@string/text_change_diseases"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.EditPasswordActivity"
+            android:exported="true"
+            android:label="@string/text_change_password"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.EditEmailActivity"
+            android:exported="true"
+            android:label="@string/text_edit_email"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.EditUsernameActivity"
+            android:exported="true"
+            android:label="@string/text_edit_username"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:exported="true"
+            android:label="@string/text_edit_profile"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:exported="true"
+            android:label="@string/text_settings"
+            android:parentActivityName="com.thanabordeedev.nutritionscanning.MainMenu"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.ScanMainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.NutritionScanning.NoActionBar" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.MainMenu"
+            android:exported="true"
+            android:theme="@style/Theme.NutritionScanning.NoActionBar" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.RegisterActivity"
+            android:exported="true"
+            android:label="@string/title_activity_register"
+            android:theme="@style/Theme.NutritionScanning.NoActionBar" />
+        <activity
+            android:name="com.thanabordeedev.nutritionscanning.MainActivity"
+            android:theme="@style/Theme.NutritionScanning.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
