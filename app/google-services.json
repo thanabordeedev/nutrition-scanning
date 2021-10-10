@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "906772980932",
+    "firebase_url": "https://nutrition-scanning-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nutrition-scanning",
+    "storage_bucket": "nutrition-scanning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906772980932:android:531b8bcd68bbff0bdb9591",
+        "android_client_info": {
+          "package_name": "com.example.nutritionscanning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906772980932-in06evptuht5idofdnnng0r40sid98ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJIDV1i-wXBdPcUnSKYS8afpYTqdpa3CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906772980932-in06evptuht5idofdnnng0r40sid98ok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906772980932:android:4c82b6f76c1168eddb9591",
+        "android_client_info": {
+          "package_name": "com.thanabordeedev.nutritionscanning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906772980932-in06evptuht5idofdnnng0r40sid98ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJIDV1i-wXBdPcUnSKYS8afpYTqdpa3CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906772980932-in06evptuht5idofdnnng0r40sid98ok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
