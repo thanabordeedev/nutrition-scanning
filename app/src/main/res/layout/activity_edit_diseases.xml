@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditDiseasesActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TextView_question_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/text_question_head"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/TextView_question_tooltip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/text_question_tooltip"
+                android:textColor="#525252"
+                android:textSize="18dp">
+            </TextView>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/TextView_question_chb1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="50dp">
+                </CheckBox>
+
+                <TextView
+                    android:id="@+id/TextView_question_dis1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_toEndOf="@+id/TextView_question_chb1"
+                    android:text="@string/text_diabetes"
+                    android:textColor="#525252"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <CheckBox
+                    android:id="@+id/TextView_question_chb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/TextView_question_chb1"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp">
+
+                </CheckBox>
+
+                <TextView
+                    android:id="@+id/TextView_question_dis2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/TextView_question_chb2"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toEndOf="@+id/TextView_question_chb2"
+                    android:text="@string/text_hbp"
+                    android:textColor="#525252"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <CheckBox
+                    android:id="@+id/TextView_question_chb3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/TextView_question_chb2"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp">
+
+                </CheckBox>
+
+                <TextView
+                    android:id="@+id/TextView_question_dis3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/TextView_question_chb3"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toEndOf="@+id/TextView_question_chb3"
+                    android:text="@string/text_nut_allergy"
+                    android:textColor="#525252"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <CheckBox
+                    android:id="@+id/TextView_question_chb4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/TextView_question_chb3"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp">
+
+                </CheckBox>
+
+                <TextView
+                    android:id="@+id/TextView_question_dis4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/TextView_question_chb4"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toEndOf="@+id/TextView_question_chb4"
+                    android:text="@string/text_seafood_allergy"
+                    android:textColor="#525252"
+                    android:textSize="18dp">
+
+                </TextView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView_confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/button_background_color"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/text_confirm_change"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold">
+            </TextView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

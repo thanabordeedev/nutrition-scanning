@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/TextViewEditProfiles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_profiles"
+                    android:layout_marginStart="20dp"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="#555555"
+                    />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewEditUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="30dp"
+                    app:cardElevation="0dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ImageViewEditUsername"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        app:civ_circle_background_color="#F0AD4E"
+                        android:src="@drawable/defence" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_edit_username"
+                        android:layout_marginStart="86dp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:layout_marginEnd="50dp"
+                        android:gravity="center_vertical"/>
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/right_arrow"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewEditEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="85dp"
+                    app:cardElevation="0dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ImageViewEditEmail"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        app:civ_circle_background_color="#F0AD4E"
+                        android:src="@drawable/email" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_edit_email"
+                        android:layout_marginStart="86dp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:layout_marginEnd="50dp"
+                        android:gravity="center_vertical"/>
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/right_arrow"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/TextViewMangeUserAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_manage_user_account"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="155dp"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="#555555"
+                    />
+
+                <TextView
+                    android:id="@+id/TextViewDeleteAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_delete_account"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="190dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="#D9534F"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
