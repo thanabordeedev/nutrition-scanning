@@ -49,6 +49,9 @@
     <string name="text_input_field_all">Please input all field.</string>
     <!-- Strings used for ScanMainActivity -->
     <string name="text_scan_result">Scan Result</string>
+    <string name="text_scan_result2">Scan Result Data</string>
+    <string name="date">Date: N/A</string>
+    <string name="time">Time: N/A</string>
     <string name="text_can_eat_or_not">No Result</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
