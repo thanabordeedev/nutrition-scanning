@@ -56,4 +56,6 @@
     <string name="text_scan_result2">ข้อมูลจากการแสกน</string>
     <string name="date">วันที่ : ไม่มีข้อมูล</string>
     <string name="time">เวลา : ไม่มีข้อมูล</string>
+    <string name="date2">วันที่ :</string>
+    <string name="time2">เวลา :</string>
 </resources>
