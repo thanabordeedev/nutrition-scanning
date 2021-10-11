@@ -44,6 +44,11 @@ class MainMenu : AppCompatActivity() {
             startActivityForResult(intent,101)
         }
 
+        binding.CardViewBtn2.setOnClickListener {
+            val intent = Intent(this,ScanHistoryActivity::class.java)
+            startActivity(intent)
+        }
+
 
         mauth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
