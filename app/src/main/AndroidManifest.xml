@@ -16,57 +16,60 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NutritionScanning">
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.EditDiseasesActivity"
+            android:name=".ScanHistoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditDiseasesActivity"
             android:exported="true"
             android:label="@string/text_change_diseases"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:parentActivityName=".SettingsActivity"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.EditPasswordActivity"
+            android:name=".EditPasswordActivity"
             android:exported="true"
             android:label="@string/text_change_password"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:parentActivityName=".SettingsActivity"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.EditEmailActivity"
+            android:name=".EditEmailActivity"
             android:exported="true"
             android:label="@string/text_edit_email"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:parentActivityName=".EditProfileActivity"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.EditUsernameActivity"
+            android:name=".EditUsernameActivity"
             android:exported="true"
             android:label="@string/text_edit_username"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:parentActivityName=".EditProfileActivity"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.EditProfileActivity"
+            android:name=".EditProfileActivity"
             android:exported="true"
             android:label="@string/text_edit_profile"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:parentActivityName=".SettingsActivity"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.SettingsActivity"
+            android:name=".SettingsActivity"
             android:exported="true"
             android:label="@string/text_settings"
-            android:parentActivityName="com.thanabordeedev.nutritionscanning.MainMenu"
+            android:parentActivityName=".MainMenu"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.ScanMainActivity"
+            android:name=".ScanMainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NutritionScanning.NoActionBar" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.MainMenu"
+            android:name=".MainMenu"
             android:exported="true"
             android:theme="@style/Theme.NutritionScanning.NoActionBar" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="true"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.NutritionScanning.NoActionBar" />
         <activity
-            android:name="com.thanabordeedev.nutritionscanning.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.NutritionScanning.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
