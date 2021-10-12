@@ -17,7 +17,11 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var timeDataTV: TextView
     private lateinit var animate: Animation
 
-    fun setDetail(context: Context ,imagePath: String,scanData: String,scanDate: String, scanTime: String){
+    fun setDetail(
+        context: android.content.Context,
+        imagePath: String,
+        scanData: String,
+        scanDate: String, scanTime: String){
 
         rImageViewIV = itemView.findViewById(R.id.rImageView)
         scanDataTV = itemView.findViewById(R.id.scanData)

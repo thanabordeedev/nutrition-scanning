@@ -2,13 +2,14 @@ package com.thanabordeedev.nutritionscanning
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.thanabordeedev.nutritionscanning.databinding.ActivityScanHistoryBinding
-import java.lang.reflect.Member
 
 class ScanHistoryActivity : AppCompatActivity() {
 
@@ -38,6 +39,9 @@ class ScanHistoryActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        var firebaseRecycleAdapter: FirebaseRecyclerAdapter<Member,ViewHolder>
+
+
+            
     }
 }
+
