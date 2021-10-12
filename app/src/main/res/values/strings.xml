@@ -50,10 +50,9 @@
     <!-- Strings used for ScanMainActivity -->
     <string name="text_scan_result">Scan Result</string>
     <string name="text_scan_result2">Scan Result Data</string>
-    <string name="date">Date: N/A</string>
-    <string name="time">Time: N/A</string>
-    <string name="date2">Date: </string>
-    <string name="time2">Time: </string>
+    <string name="date">Date: </string>
+    <string name="time">Time: </string>
+    <string name="dataNull">N/A</string>
     <string name="text_can_eat_or_not">No Result</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
