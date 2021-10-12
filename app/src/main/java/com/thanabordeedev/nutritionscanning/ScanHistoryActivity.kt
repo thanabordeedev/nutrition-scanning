@@ -3,21 +3,21 @@ package com.thanabordeedev.nutritionscanning
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.thanabordeedev.nutritionscanning.databinding.ActivityScanHistoryBinding
 
 class ScanHistoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScanHistoryBinding
-    private lateinit var mRecylerView: RecyclerView
-    private lateinit var mauth: FirebaseAuth
-    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseRef: DatabaseReference
+    private lateinit var scanArrayList : ArrayList<ScanResultData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,21 +27,37 @@ class ScanHistoryActivity : AppCompatActivity() {
         binding = ActivityScanHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mauth = FirebaseAuth.getInstance()
+        mRecyclerView = findViewById(R.id.recyclerview)
+        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        mRecyclerView.setHasFixedSize(true)
 
-        mRecylerView = binding.recyclerview
-        mRecylerView.setHasFixedSize(true)
+        scanArrayList = arrayListOf<ScanResultData>()
+        getScanData()
 
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        firebaseRef = firebaseDatabase.getReference("ScanResult_Data").child(mauth.currentUser!!.uid)
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun getScanData() {
+        mAuth = FirebaseAuth.getInstance()
+        firebaseRef = FirebaseDatabase.getInstance().getReference("ScanResult_Data").child(mAuth.currentUser!!.uid)
 
+        firebaseRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(scanDataSnapshot in snapshot.children){
+                        val num = scanDataSnapshot.getValue(ScanResultData::class.java)
+                        scanArrayList.add(num!!)
+                    }
+                    mRecyclerView.adapter = ScanListAdapter(scanArrayList)
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
-            
+        })
     }
+
+
 }
 

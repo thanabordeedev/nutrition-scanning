@@ -21,7 +21,7 @@ class FirebaseStorageManager {
     fun uploadImage(imageURI: Uri){
 
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-        val formatterDate = SimpleDateFormat("yyyy_MM_dd", Locale.getDefault())
+        val formatterDate = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val formatterTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         val now = Date()
         val filename = formatter.format(now)
