@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -66,7 +67,8 @@ class ScanMainActivity : AppCompatActivity() {
 
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",10,8)
+                                    Log.e("Test plus : ",obj.toString())
 
                                 }
                             )

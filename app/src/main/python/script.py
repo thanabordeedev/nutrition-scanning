@@ -8,10 +8,17 @@ import io
 from matplotlib import pyplot as plt
 
 
-def main(data,discreaseIndex):
+def main(data1,data2):
+
+    num1 = int(data1)
+    num2 = int(data2) 
+
+    summ = num1 + num2
+
+    return "sum is " + str(summ)
 
     #IMAGE_PATH = data
-    dIndex = discreaseIndex
+    #dIndex = discreaseIndex
 
 
     #reader = easyocr.Reader('th')
