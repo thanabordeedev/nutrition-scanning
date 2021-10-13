@@ -25,8 +25,14 @@ android {
                 install "torchvision"
                 //matplotlib
                 install "matplotlib"
-
+                //Thai Text cut
+                install "epitran"
+                install "sklearn_crfsuite"
+                install "tensorflow"
+                install "attacut"
+                install "pythainlp"
             }
+
         }
 
         sourceSets{

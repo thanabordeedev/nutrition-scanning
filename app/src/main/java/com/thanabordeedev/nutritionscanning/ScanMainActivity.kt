@@ -66,9 +66,9 @@ class ScanMainActivity : AppCompatActivity() {
                                     mDiseasesData = it.asDiseasesData()!!
 
                                     var py : Python = Python.getInstance()
-                                    var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
-                                    Log.e("Test Result",obj.toString())
+                                    //var pyObj : PyObject = py.getModule("script")
+                                    //var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
+                                    //Log.e("Test Result",obj.toString())
                                 }
                             )
                         }

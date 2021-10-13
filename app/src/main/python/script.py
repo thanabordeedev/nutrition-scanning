@@ -4,7 +4,6 @@ import cv2
 import easyocr
 from matplotlib import pyplot as plt
 
-
 def main(data,discreaseIndex):
 
     IMAGE_PATH = data
