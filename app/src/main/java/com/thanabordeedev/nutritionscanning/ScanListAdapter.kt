@@ -16,7 +16,11 @@ class ScanListAdapter(private val scanHistoryList : ArrayList<ScanResultData>) :
         val currentItem = scanHistoryList[position]
 
         Picasso.get().load(currentItem.imagePath).into(holder.rImageViewIV)
-        holder.scanDataTV.text = currentItem.scanResult
+        if(currentItem.scanResult == ""){
+            holder.scanDataTV.setText(R.string.text_can_eat_or_not)
+        }else{
+            holder.scanDataTV.text = currentItem.scanResult
+        }
         holder.dateDataTV.text = currentItem.scanDate
         holder.timeDataTV.text = currentItem.scanTime
     }

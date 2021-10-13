@@ -26,11 +26,11 @@ android {
                 //matplotlib
                 install "matplotlib"
                 //Thai Text cut
-                install "epitran"
-                install "sklearn_crfsuite"
-                install "tensorflow"
-                install "attacut"
-                install "pythainlp"
+                //install "epitran"
+                //install "sklearn_crfsuite"
+                //install "tensorflow"
+                //install "attacut"
+                //install "pythainlp"
             }
 
         }
