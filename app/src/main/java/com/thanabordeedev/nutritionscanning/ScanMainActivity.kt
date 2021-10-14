@@ -1,12 +1,9 @@
 package com.thanabordeedev.nutritionscanning
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
@@ -15,7 +12,11 @@ import com.thanabordeedev.nutritionscanning.databinding.ActivityScanMainBinding
 import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import android.graphics.BitmapFactory
+import android.util.Base64
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
+
 
 class ScanMainActivity : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class ScanMainActivity : AppCompatActivity() {
     private lateinit var mDatabase1: DatabaseReference
     private lateinit var mDatabase2: DatabaseReference
     private var maxId : Long = 1
+    private var imageString = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class ScanMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        var path = intent.getParcelableExtra<Bitmap>("tempUri")
+        val path = intent.getParcelableExtra<Bitmap>("tempUri")
         binding.surfaceCameraPreview.setImageBitmap(path)
 
         mauth = FirebaseAuth.getInstance()
@@ -59,11 +61,13 @@ class ScanMainActivity : AppCompatActivity() {
                     scanResultReference().addListenerForSingleValueEvent(
                         ValueListenerAdapter{
                             mScanResult = it.asScanResultData()!!
-                            val pic = mScanResult.imagePath
 
                             diseasesReference().addListenerForSingleValueEvent(
                                 ValueListenerAdapter{
                                     mDiseasesData = it.asDiseasesData()!!
+
+                                    // convert Image to byte string
+                                    imageString = StringToBitMap(mScanResult.imagePath)
 
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
@@ -75,6 +79,7 @@ class ScanMainActivity : AppCompatActivity() {
                     )
                 }
             }
+
 
             override fun onCancelled(error: DatabaseError) {
             }
@@ -88,12 +93,22 @@ class ScanMainActivity : AppCompatActivity() {
         }
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
-        val bytes = ByteArrayOutputStream()
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path: String = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null)
-        return Uri.parse(path)
+    fun StringToBitMap(encodedString: String?): String {
+        val encodeByte: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
+        var bitMap: Bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
+        var baos : ByteArrayOutputStream = ByteArrayOutputStream()
+        bitMap.compress(Bitmap.CompressFormat.PNG,100,baos)
+        //store in byte array
+        var imageBytes : ByteArray = baos.toByteArray()
+        //finally encode to string
+        var encodedImage : String = android.util.Base64.encodeToString(imageBytes,Base64.DEFAULT)
+        return encodedImage
     }
+
+
+
+
+    
 
 
 
