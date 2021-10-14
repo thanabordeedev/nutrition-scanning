@@ -22,6 +22,7 @@ android {
                 install "easyocr"
                 install "numpy"
                 //pytorch
+                install "torch"
                 install "torchvision"
                 //matplotlib
                 install "matplotlib"
@@ -29,10 +30,11 @@ android {
                 install "tensorflow"
                 install "deepcut"
                 //install "epitran"
-                //install "sklearn_crfsuite"
+                //install "sklearn-crfsuite==0.3.6"
                 //install "attacut"
                 //install "pythainlp"
             }
+
 
         }
 
