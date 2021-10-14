@@ -69,9 +69,10 @@ class ScanMainActivity : AppCompatActivity() {
                                     // convert Image to byte string
                                     imageString = StringToBitMap(mScanResult.imagePath)
 
+                                    //now i imageString we get encoded image string
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
                                     Log.e("Test Result",obj.toString())
                                 }
                             )
