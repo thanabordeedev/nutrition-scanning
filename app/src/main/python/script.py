@@ -9,16 +9,12 @@ from matplotlib import pyplot as plt
 
 def main(data,discreaseIndex):
 
-    decoded_data = base64.b64decode(data)
-    np_data = np.fromstring(decoded_data,np.uint8)
-    img = cv2.imdecode(np_data,cv2.IMREAD_UNCHANGED)
-
     # Load color image (BGR) and convert to gray
-    img = cv2.imread(img,1)
-    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    img = cv2.imread(data,1)
+    img_gray = cv2.cvtColor(np.ascontiguousarray(data), cv2.COLOR_RGB2GRAY)
 
     # Load in grayscale mode
-    img_gray_mode = cv2.imread(img,0)
+    img_gray_mode = cv2.imread(data,0)
 
     # Matrix of one which is multipled by scaler value of 60 matrix has dimensions same as our input image
     #Intensity_Matrix = np.ones(img_gray_mode, dtype="uint8") *60  

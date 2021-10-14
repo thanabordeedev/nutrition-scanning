@@ -15,8 +15,6 @@ import com.google.firebase.database.*
 import android.graphics.BitmapFactory
 import android.util.Base64
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
-
 
 class ScanMainActivity : AppCompatActivity() {
 
@@ -66,13 +64,10 @@ class ScanMainActivity : AppCompatActivity() {
                                 ValueListenerAdapter{
                                     mDiseasesData = it.asDiseasesData()!!
 
-                                    // convert Image to byte string
-                                    imageString = StringToBitMap(mScanResult.imagePath)
-
                                     //now i imageString we get encoded image string
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
                                     Log.e("Test Result",obj.toString())
                                 }
                             )
@@ -80,7 +75,6 @@ class ScanMainActivity : AppCompatActivity() {
                     )
                 }
             }
-
 
             override fun onCancelled(error: DatabaseError) {
             }
@@ -94,8 +88,8 @@ class ScanMainActivity : AppCompatActivity() {
         }
     }
 
-    fun StringToBitMap(encodedString: String?): String {
-        val encodeByte: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
+    /*fun StringToBitMap(encodedString: String?): String {
+        var encodeByte: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
         var bitMap: Bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
         var baos : ByteArrayOutputStream = ByteArrayOutputStream()
         bitMap.compress(Bitmap.CompressFormat.PNG,100,baos)
@@ -104,7 +98,7 @@ class ScanMainActivity : AppCompatActivity() {
         //finally encode to string
         var encodedImage : String = android.util.Base64.encodeToString(imageBytes,Base64.DEFAULT)
         return encodedImage
-    }
+    }*/
 
 
 
