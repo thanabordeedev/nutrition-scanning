@@ -47,6 +47,8 @@ class FirebaseStorageManager {
 
         val uploadTask = mStorageRef.child("images/$uid/$filename.jpg").putFile(imageURI)
 
+
+
         uploadTask.addOnSuccessListener {
             Log.e(TAG,"Image Upload successfully")
 

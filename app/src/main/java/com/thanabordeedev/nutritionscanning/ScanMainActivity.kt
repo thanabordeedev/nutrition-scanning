@@ -12,9 +12,8 @@ import com.thanabordeedev.nutritionscanning.databinding.ActivityScanMainBinding
 import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import android.graphics.BitmapFactory
-import android.util.Base64
-import java.io.ByteArrayOutputStream
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class ScanMainActivity : AppCompatActivity() {
 
@@ -24,6 +23,7 @@ class ScanMainActivity : AppCompatActivity() {
     private lateinit var mauth: FirebaseAuth
     private lateinit var mDatabase1: DatabaseReference
     private lateinit var mDatabase2: DatabaseReference
+    private val mStorageRef = FirebaseStorage.getInstance().reference
     private var maxId : Long = 1
     private var imageString = ""
 
@@ -64,10 +64,12 @@ class ScanMainActivity : AppCompatActivity() {
                                 ValueListenerAdapter{
                                     mDiseasesData = it.asDiseasesData()!!
 
+                                    //fun PicReference() : StorageReference =
+
                                     //now i imageString we get encoded image string
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",mStorageRef.child("images/$uid/${mScanResult.scanDateTime}.jpg"),mDiseasesData.diseaseIndex)
                                     Log.e("Test Result",obj.toString())
                                 }
                             )
