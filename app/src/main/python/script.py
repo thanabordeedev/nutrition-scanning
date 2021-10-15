@@ -11,7 +11,7 @@ def main(data,discreaseIndex):
 
     # Load color image (BGR) and convert to gray
     img = cv2.imread(data,1)
-    img_gray = cv2.cvtColor(np.ascontiguousarray(data), cv2.COLOR_RGB2GRAY)
+    img_gray = cv2.cvtColor(np.ascontiguousarray(img), cv2.COLOR_RGB2GRAY)
 
     # Load in grayscale mode
     img_gray_mode = cv2.imread(data,0)

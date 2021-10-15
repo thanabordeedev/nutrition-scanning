@@ -34,18 +34,15 @@ class SecondFragment : Fragment(){
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         auth = FirebaseAuth.getInstance()
         databaseReference = Firebase.database.reference
         val uid = auth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance().getReference("Name_Data")
-
 
         binding.textViewNextBtn.setOnClickListener {
 
@@ -62,19 +59,12 @@ class SecondFragment : Fragment(){
                     Toast.makeText(this@SecondFragment.context,R.string.text_input_field_all,Toast.LENGTH_SHORT).show()
                 }
             }
-
-
         }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 
 }

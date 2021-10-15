@@ -88,25 +88,6 @@ class ScanMainActivity : AppCompatActivity() {
         }
     }
 
-    /*fun StringToBitMap(encodedString: String?): String {
-        var encodeByte: ByteArray = Base64.decode(encodedString, Base64.DEFAULT)
-        var bitMap: Bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
-        var baos : ByteArrayOutputStream = ByteArrayOutputStream()
-        bitMap.compress(Bitmap.CompressFormat.PNG,100,baos)
-        //store in byte array
-        var imageBytes : ByteArray = baos.toByteArray()
-        //finally encode to string
-        var encodedImage : String = android.util.Base64.encodeToString(imageBytes,Base64.DEFAULT)
-        return encodedImage
-    }*/
-
-
-
-
-    
-
-
-
 }
 
 
