@@ -55,7 +55,7 @@ class FirebaseStorageManager {
             val downloadURLTask = mStorageRef.child("images/$uid/$filename.jpg").downloadUrl
 
             downloadURLTask.addOnSuccessListener {
-                val scanResult = ScanResultData("$it",filename,"",date,time)
+                val scanResult = ScanResultData("$it","",date,time)
                 databaseReference.child((maxId+1).toString()).setValue(scanResult)
 
             }

@@ -64,12 +64,10 @@ class ScanMainActivity : AppCompatActivity() {
                                 ValueListenerAdapter{
                                     mDiseasesData = it.asDiseasesData()!!
 
-                                    //fun PicReference() : StorageReference =
-
                                     //now i imageString we get encoded image string
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mStorageRef.child("images/$uid/${mScanResult.scanDateTime}.jpg"),mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
                                     Log.e("Test Result",obj.toString())
                                 }
                             )
