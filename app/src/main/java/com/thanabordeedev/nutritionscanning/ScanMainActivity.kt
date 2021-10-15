@@ -36,7 +36,6 @@ class ScanMainActivity : AppCompatActivity() {
         binding = ActivityScanMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val path = intent.getParcelableExtra<Bitmap>("tempUri")
         binding.surfaceCameraPreview.setImageBitmap(path)
 

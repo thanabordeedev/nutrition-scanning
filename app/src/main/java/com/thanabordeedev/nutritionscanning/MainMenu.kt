@@ -15,6 +15,7 @@ import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.content.Context
+import android.os.Handler
 import java.io.ByteArrayOutputStream
 
 
@@ -48,8 +49,7 @@ class MainMenu : AppCompatActivity() {
             val intent = Intent(this,ScanHistoryActivity::class.java)
             startActivity(intent)
         }
-
-
+        
         mauth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
@@ -62,7 +62,6 @@ class MainMenu : AppCompatActivity() {
                 binding.TextViewWelcome2.text = mName.firstName + " " + mName.lastName
             }
             )
-
 
         btnClicked()
     }
@@ -95,16 +94,21 @@ class MainMenu : AppCompatActivity() {
             val tempUri: Uri? = photo?.let { getImageUri(this, it) }
             val i = Intent(applicationContext,ScanMainActivity::class.java)
 
-
             if (tempUri != null) {
                 FirebaseStorageManager().uploadImage(tempUri)
             }
             i.putExtra("tempUri",photo)
 
+
+            //loading for images
+            var loadingDialog : LoadingDialog = LoadingDialog(this)
+            loadingDialog.startLoadingDialog()
+            var handler : Handler = Handler()
+            handler.postDelayed({ loadingDialog.dismissDialog() },5000)
+
             startActivity(i)
             finish()
         }
-
     }
 
     fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
@@ -114,7 +118,6 @@ class MainMenu : AppCompatActivity() {
             MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
         return Uri.parse(path)
     }
-
 
     override fun onBackPressed() {
     }
