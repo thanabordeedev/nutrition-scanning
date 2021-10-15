@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
 
 class ScanMainActivity : AppCompatActivity() {
 
@@ -64,10 +66,12 @@ class ScanMainActivity : AppCompatActivity() {
                                 ValueListenerAdapter{
                                     mDiseasesData = it.asDiseasesData()!!
 
+                                    imageString = getStringImage(path)
+
                                     //now i imageString we get encoded image string
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
-                                    var obj = pyObj.callAttr("main",mScanResult.imagePath,mDiseasesData.diseaseIndex)
+                                    var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
                                     Log.e("Test Result",obj.toString())
                                 }
                             )
@@ -86,6 +90,16 @@ class ScanMainActivity : AppCompatActivity() {
             binding.textViewOkBtn.context.startActivity(intent)
             finish()
         }
+    }
+
+    private fun getStringImage(path: Bitmap?): String {
+        var baos : ByteArrayOutputStream = ByteArrayOutputStream()
+        path?.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        //store in byte array
+        var imageBytes : ByteArray = baos.toByteArray()
+        //finally encoded to string
+        var encodedImage : String = android.util.Base64.encodeToString(imageBytes,Base64.DEFAULT)
+        return encodedImage
     }
 
 }

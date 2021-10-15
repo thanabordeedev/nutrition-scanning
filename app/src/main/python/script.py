@@ -9,20 +9,19 @@ from matplotlib import pyplot as plt
 
 def main(data,discreaseIndex):
 
-    # Load color image (BGR) and convert to gray
-    img = cv2.imread(data,1)
-    img_gray = cv2.cvtColor(np.ascontiguousarray(img), cv2.COLOR_RGB2GRAY)
+    decoded_data = base64.b64decode(data)
+    np_data = np.fromstring(decoded_data,np.uint8)
+    img = cv2.imdecode(np_data,cv2.IMREAD_UNCHANGED)
 
-    # Load in grayscale mode
-    img_gray_mode = cv2.imread(data,0)
+    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
     # Matrix of one which is multipled by scaler value of 60 matrix has dimensions same as our input image
-    #Intensity_Matrix = np.ones(img_gray_mode, dtype="uint8") *60  
+    Intensity_Matrix = np.ones(img_gray.shape, dtype="uint8") *60  
 
     # Subtract Intensity Matrix from input image in order to decease the brightness
-    #contrast_img = cv2.subtract(img_gray_mode,Intensity_Matrix) 
+    contrast_img = cv2.subtract(img_gray,Intensity_Matrix) 
 
-    #threshold_img = cv2.adaptiveThreshold(contrast_img,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
+    threshold_img = cv2.adaptiveThreshold(contrast_img,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
 
     discreaseResult = ""
 
