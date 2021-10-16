@@ -9,9 +9,9 @@ open class LoadingDialog(var myActivity : Activity) {
     private lateinit var dialog: AlertDialog
 
     fun startLoadingDialog(){
-        var buider : AlertDialog.Builder = AlertDialog.Builder(myActivity)
+        val buider : AlertDialog.Builder = AlertDialog.Builder(myActivity)
 
-        var inflater : LayoutInflater = myActivity.layoutInflater
+        val inflater : LayoutInflater = myActivity.layoutInflater
         buider.setView(inflater.inflate(R.layout.custom_dialog,null))
         buider.setCancelable(false)
 
