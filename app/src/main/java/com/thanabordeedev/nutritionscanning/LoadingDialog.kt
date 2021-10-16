@@ -20,6 +20,7 @@ open class LoadingDialog(var myActivity : Activity) {
     }
 
     fun dismissDialog(){
+        //test
         dialog.dismiss()
     }
 }
