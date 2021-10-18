@@ -1,5 +1,6 @@
 package com.thanabordeedev.nutritionscanning
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ class ScanMainActivity : AppCompatActivity() {
     private val mStorageRef = FirebaseStorage.getInstance().reference
     private var maxId : Long = 1
     private var imageString = ""
+    lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,14 @@ class ScanMainActivity : AppCompatActivity() {
                                     var py : Python = Python.getInstance()
                                     var pyObj : PyObject = py.getModule("script")
                                     var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
+                                    /*if(obj.isEmpty()){
+                                        //loading for images
+                                        progressDialog = ProgressDialog(this@ScanMainActivity)
+                                        progressDialog.show()
+                                        progressDialog.setContentView(R.layout.custom_dialog)
+                                    } else {
+                                        progressDialog.dismiss()
+                                    }*/
                                     Log.e("Test Result",obj.toString())
                                 }
                             )

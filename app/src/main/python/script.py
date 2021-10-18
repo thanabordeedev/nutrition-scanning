@@ -1,4 +1,5 @@
 #from pythainlp import sent_tokenize, word_tokenize
+import sys
 import numpy as np
 import cv2
 from PIL import Image
@@ -25,7 +26,9 @@ def main(data,discreaseIndex):
 
     discreaseResult = ""
 
-    #reader = easyocr.Reader(['th'])
+
+
+    reader = easyocr.Reader(['th'])
     #result = reader.readtext(threshold_img)
     #for detection in result:
     #    top_left = tuple((int(val) for val in detection[0][0]))

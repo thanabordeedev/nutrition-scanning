@@ -26,7 +26,6 @@ class MainMenu : AppCompatActivity() {
     private lateinit var mName: NameData
     private lateinit var mauth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
-    private lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,11 +99,8 @@ class MainMenu : AppCompatActivity() {
             }
             i.putExtra("tempUri",photo)
 
+            startActivity(i)
 
-            //loading for images
-            progressDialog = ProgressDialog(this)
-            progressDialog.show()
-            progressDialog.setContentView(R.layout.custom_dialog)
         }
     }
 
@@ -117,6 +113,5 @@ class MainMenu : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //progressDialog.dismiss()
     }
 }
