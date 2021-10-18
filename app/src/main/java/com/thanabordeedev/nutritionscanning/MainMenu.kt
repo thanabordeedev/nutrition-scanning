@@ -1,6 +1,7 @@
 package com.thanabordeedev.nutritionscanning
 
 import android.Manifest
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -15,7 +16,6 @@ import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.content.Context
-import android.os.Handler
 import java.io.ByteArrayOutputStream
 
 
@@ -26,6 +26,7 @@ class MainMenu : AppCompatActivity() {
     private lateinit var mName: NameData
     private lateinit var mauth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
+    private lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class MainMenu : AppCompatActivity() {
             val intent = Intent(this,ScanHistoryActivity::class.java)
             startActivity(intent)
         }
-        
+
         mauth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
@@ -101,13 +102,10 @@ class MainMenu : AppCompatActivity() {
 
 
             //loading for images
-            var loadingDialog : LoadingDialog = LoadingDialog(this)
-            loadingDialog.startLoadingDialog()
-            var handler : Handler = Handler()
-            handler.postDelayed({ loadingDialog.dismissDialog() },5000)
-
-            startActivity(i)
-            finish()
+            progressDialog = ProgressDialog(this)
+            progressDialog.show()
+            progressDialog.setContentView(R.layout.custom_dialog)
+            progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
     }
 
@@ -120,5 +118,6 @@ class MainMenu : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        progressDialog.dismiss()
     }
 }
