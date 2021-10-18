@@ -105,7 +105,6 @@ class MainMenu : AppCompatActivity() {
             progressDialog = ProgressDialog(this)
             progressDialog.show()
             progressDialog.setContentView(R.layout.custom_dialog)
-            progressDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
     }
 
@@ -118,6 +117,6 @@ class MainMenu : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        progressDialog.dismiss()
+        //progressDialog.dismiss()
     }
 }
