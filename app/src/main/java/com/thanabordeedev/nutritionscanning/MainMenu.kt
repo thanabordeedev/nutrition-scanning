@@ -23,7 +23,6 @@ import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import java.io.ByteArrayOutputStream
 
-
 class MainMenu : AppCompatActivity() {
 
     private lateinit  var binding:ActivityMainMenuBinding
@@ -78,7 +77,6 @@ class MainMenu : AppCompatActivity() {
             )
 
         btnClicked()
-
 
     }
 
@@ -150,11 +148,12 @@ class MainMenu : AppCompatActivity() {
                                         var py : Python = Python.getInstance()
                                         var pyObj : PyObject = py.getModule("script")
                                         var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        if(pyObj.isEmpty()){
+                                        if(obj.run { true }){
                                             //loading for images
                                             progressDialog = ProgressDialog(this@MainMenu)
                                             progressDialog.show()
                                             progressDialog.setContentView(R.layout.custom_dialog)
+
                                         } else {
                                             progressDialog.dismiss()
                                             startActivity(i)
@@ -170,9 +169,6 @@ class MainMenu : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
-
-
-
 
         }
     }
