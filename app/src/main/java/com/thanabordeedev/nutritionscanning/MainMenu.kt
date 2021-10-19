@@ -16,6 +16,11 @@ import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.content.Context
+import android.util.Base64
+import android.util.Log
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import java.io.ByteArrayOutputStream
 
 
@@ -26,6 +31,15 @@ class MainMenu : AppCompatActivity() {
     private lateinit var mName: NameData
     private lateinit var mauth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
+
+    private lateinit var mScanResult: ScanResultData
+    private lateinit var mDiseasesData: DiseasesData
+    private lateinit var mDatabase1: DatabaseReference
+    private lateinit var mDatabase2: DatabaseReference
+
+    private var maxId : Long = 1
+    private var imageString = ""
+    lateinit var progressDialog : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +78,8 @@ class MainMenu : AppCompatActivity() {
             )
 
         btnClicked()
+
+
     }
 
     private fun btnClicked(){
@@ -99,7 +115,64 @@ class MainMenu : AppCompatActivity() {
             }
             i.putExtra("tempUri",photo)
 
-            startActivity(i)
+            //run python code here
+
+            mauth = FirebaseAuth.getInstance()
+            mDatabase1 = FirebaseDatabase.getInstance().reference
+            mDatabase2 = FirebaseDatabase.getInstance().reference
+            val uid = mauth.currentUser?.uid
+
+            mDatabase1 = mDatabase1.child("ScanResult_Data").child(uid!!)
+            fun diseasesReference(): DatabaseReference = mDatabase2.child("Diseases_Data")
+
+            //Python Script
+            if(!Python.isStarted())
+                Python.start(AndroidPlatform(this))
+
+            mDatabase1.addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        maxId = (snapshot.childrenCount)
+
+                        fun scanResultReference(): DatabaseReference = mDatabase1.child(maxId.toString())
+
+                        scanResultReference().addListenerForSingleValueEvent(
+                            ValueListenerAdapter{
+                                mScanResult = it.asScanResultData()!!
+
+                                diseasesReference().addListenerForSingleValueEvent(
+                                    ValueListenerAdapter{
+                                        mDiseasesData = it.asDiseasesData()!!
+
+                                        imageString = getStringImage(photo)
+
+                                        //now i imageString we get encoded image string
+                                        var py : Python = Python.getInstance()
+                                        var pyObj : PyObject = py.getModule("script")
+                                        var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
+                                        if(pyObj.isEmpty()){
+                                            //loading for images
+                                            progressDialog = ProgressDialog(this@MainMenu)
+                                            progressDialog.show()
+                                            progressDialog.setContentView(R.layout.custom_dialog)
+                                        } else {
+                                            progressDialog.dismiss()
+                                            startActivity(i)
+                                        }
+                                        Log.e("Test Result",obj.toString())
+                                    }
+                                )
+                            }
+                        )
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+
+
+
 
         }
     }
@@ -110,6 +183,16 @@ class MainMenu : AppCompatActivity() {
         val path =
             MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
         return Uri.parse(path)
+    }
+
+    private fun getStringImage(path: Bitmap?): String {
+        var baos : ByteArrayOutputStream = ByteArrayOutputStream()
+        path?.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        //store in byte array
+        var imageBytes : ByteArray = baos.toByteArray()
+        //finally encoded to string
+        var encodedImage : String = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return encodedImage
     }
 
     override fun onBackPressed() {
