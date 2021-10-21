@@ -54,8 +54,8 @@
     <string name="text_failed_to_update">อัพเดตไม่สำเร็จ</string>
     <string name="text_successfully_to_updated">อัพเดตสำเร็จ</string>
     <string name="text_scan_result2">ข้อมูลจากการแสกน</string>
-    <string name="date">วันที่ : ไม่มีข้อมูล</string>
-    <string name="time">เวลา : ไม่มีข้อมูล</string>
+    <string name="date">วันที่ :</string>
+    <string name="time">เวลา :</string>
     <string name="dataNull">N/A</string>
     <string name="text_loading">กำลังโหลดข้อมูล</string>
 </resources>

@@ -141,6 +141,10 @@ class MainMenu : AppCompatActivity() {
                                 diseasesReference().addListenerForSingleValueEvent(
                                     ValueListenerAdapter{
                                         mDiseasesData = it.asDiseasesData()!!
+                                        val diseaseIndex = mDiseasesData.diseaseIndex
+                                        if (diseaseIndex != null) {
+                                            Log.e("test",diseaseIndex)
+                                        }
 
                                         imageString = getStringImage(photo)
 
@@ -153,10 +157,10 @@ class MainMenu : AppCompatActivity() {
                                             progressDialog = ProgressDialog(this@MainMenu)
                                             progressDialog.show()
                                             progressDialog.setContentView(R.layout.custom_dialog)
-
                                         } else {
                                             progressDialog.dismiss()
                                             startActivity(i)
+
                                         }
                                         Log.e("Test Result",obj.toString())
                                     }

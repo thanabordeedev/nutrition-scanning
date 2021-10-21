@@ -26,9 +26,7 @@ def main(data,discreaseIndex):
 
     discreaseResult = ""
 
-
-
-    reader = easyocr.Reader(['th'])
+    reader = easyocr.Reader(['th'],recog_network='thai_g1')
     #result = reader.readtext(threshold_img)
     #for detection in result:
     #    top_left = tuple((int(val) for val in detection[0][0]))
