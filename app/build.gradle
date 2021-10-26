@@ -34,11 +34,6 @@ android {
                 install "tensorflow"
                 install "deepcut"
                 //problem
-                install "git+https://github.com/PyThaiNLP/pythainlp@3fdbc4cce5a48092d99fb98668d2248b662d2976"
-                //install "epitran"
-                //install "sklearn-crfsuite"
-                //install "attacut"
-                //install "pythainlp"
             }
 
 
