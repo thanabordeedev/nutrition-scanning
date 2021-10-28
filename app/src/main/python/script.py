@@ -1,5 +1,3 @@
-#from pythainlp import sent_tokenize, word_tokenize
-import sys
 import numpy as np
 import cv2
 from PIL import Image
@@ -7,6 +5,7 @@ import base64
 import io
 import easyocr
 from matplotlib import pyplot as plt
+import deepcut
 
 def main(data,discreaseIndex):
 
@@ -27,27 +26,16 @@ def main(data,discreaseIndex):
     discreaseResult = ""
 
     reader = easyocr.Reader(['th'],recog_network='thai_g1')
-    #result = reader.readtext(threshold_img)
-    #for detection in result:
-    #    top_left = tuple((int(val) for val in detection[0][0]))
-    #    buttom_right = tuple((int(val) for val in detection[0][2]))
-    #    text = detection[1]
-    #    font = cv2.FONT_HERSHEY_DUPLEX
-    #    img = cv2.rectangle(img, top_left, buttom_right, (0,255,0), 5)
-    #    img = cv2.putText(img, text, top_left, font, 1,(255,255,255),2, cv2.LINE_AA)
+    result = reader.readtext(threshold_img)
+    for detection in result:
+        top_left = tuple((int(val) for val in detection[0][0]))
+        buttom_right = tuple((int(val) for val in detection[0][2]))
+        text = detection[1]
+        font = cv2.FONT_HERSHEY_DUPLEX
+        img = cv2.rectangle(img, top_left, buttom_right, (0,255,0), 5)
+        img = cv2.putText(img, text, top_left, font, 1,(255,255,255),2, cv2.LINE_AA)
 
-        
-        #text_sub = word_tokenize(text,engine="multi_cut")
-        #print(text_sub)
-        #for index in range(len(text_sub)):
-        #    if text_sub[index] == 'น้ำตาล' or text_sub[index] == 'นำตาล':
-        #        discreaseResult += 1
-        #    elif text_sub[index] == 'โซเดียม':
-        #        discreaseResult += 2
-        #    elif text_sub[index] == 'ถั่วเหลือง' or text_sub[index] == 'ถวเหลอง' or text_sub[index] == 'ถว':
-        #        discreaseResult += 3
-        #    elif text_sub[index] == 'ทะเล':
-        #        discreaseResult += 4
+        discreaseList = discreaseIndex.split()
 
     return discreaseResult
 
