@@ -152,13 +152,7 @@ class MainMenu : AppCompatActivity() {
                                         var py : Python = Python.getInstance()
                                         var pyObj : PyObject = py.getModule("script")
                                         var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        if(obj.run { true }){
-                                            //loading for images
-                                            progressDialog = ProgressDialog(this@MainMenu)
-                                            progressDialog.show()
-                                            progressDialog.setContentView(R.layout.custom_dialog)
-                                        } else if (obj.run { false }){
-                                            progressDialog.dismiss()
+                                        if(obj.toString() != ""){
                                             startActivity(i)
                                             Log.e("Test Result",obj.toString())
                                         }

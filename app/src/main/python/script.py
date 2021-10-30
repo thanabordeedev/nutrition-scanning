@@ -28,12 +28,12 @@ def main(data,discreaseIndex):
     reader = easyocr.Reader(['th'],recog_network='thai_g1')
     result = reader.readtext(threshold_img)
     for detection in result:
-        top_left = tuple((int(val) for val in detection[0][0]))
-        buttom_right = tuple((int(val) for val in detection[0][2]))
+        #top_left = tuple((int(val) for val in detection[0][0]))
+        #buttom_right = tuple((int(val) for val in detection[0][2]))
         text = detection[1]
-        font = cv2.FONT_HERSHEY_DUPLEX
-        img = cv2.rectangle(img, top_left, buttom_right, (0,255,0), 5)
-        img = cv2.putText(img, text, top_left, font, 1,(255,255,255),2, cv2.LINE_AA)
+        #font = cv2.FONT_HERSHEY_DUPLEX
+        #img = cv2.rectangle(img, top_left, buttom_right, (0,255,0), 5)
+        #img = cv2.putText(img, text, top_left, font, 1,(255,255,255),2, cv2.LINE_AA)
 
         discreaseList = discreaseIndex.split()
 
@@ -54,4 +54,17 @@ def main(data,discreaseIndex):
                     if text_cut[index] == "ทะเล":
                         discreaseResult +="4"
 
+        if discreaseResult == "":
+            discreaseResult +="5"
+
+    #remove pycache
+    del decoded_data
+    del np_data
+    del img_gray
+    del Intensity_Matrix
+    del contrast_img
+    del reader
+    del result
+
     return discreaseResult
+
