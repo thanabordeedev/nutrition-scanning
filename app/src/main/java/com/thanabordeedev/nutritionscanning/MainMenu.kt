@@ -121,7 +121,7 @@ class MainMenu : AppCompatActivity() {
             val uid = mauth.currentUser?.uid
 
             mDatabase1 = mDatabase1.child("ScanResult_Data").child(uid!!)
-            fun diseasesReference(): DatabaseReference = mDatabase2.child("Diseases_Data")
+            fun diseasesReference(): DatabaseReference = mDatabase2.child("Diseases_Data").child(uid!!)
 
             //Python Script
             if(!Python.isStarted())
@@ -152,17 +152,17 @@ class MainMenu : AppCompatActivity() {
                                         var py : Python = Python.getInstance()
                                         var pyObj : PyObject = py.getModule("script")
                                         var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        /*if(obj.run { true }){
+                                        if(obj.run { true }){
                                             //loading for images
                                             progressDialog = ProgressDialog(this@MainMenu)
                                             progressDialog.show()
                                             progressDialog.setContentView(R.layout.custom_dialog)
-                                        } else {
+                                        } else if (obj.run { false }){
                                             progressDialog.dismiss()
                                             startActivity(i)
+                                            Log.e("Test Result",obj.toString())
+                                        }
 
-                                        }*/
-                                        Log.e("Test Result",obj.toString())
                                     }
                                 )
                             }
