@@ -16,12 +16,18 @@ import com.thanabordeedev.nutritionscanning.utils.ValueListenerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import android.content.Context
+import android.os.Environment
 import android.util.Base64
 import android.util.Log
+import androidx.core.content.FileProvider
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainMenu : AppCompatActivity() {
 
@@ -38,7 +44,7 @@ class MainMenu : AppCompatActivity() {
 
     private var maxId : Long = 1
     private var imageString = ""
-    lateinit var progressDialog : ProgressDialog
+    lateinit var currentPhotoPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +60,7 @@ class MainMenu : AppCompatActivity() {
 
         //Scan page Intent
         binding.CardViewBtn1.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent,101)
+            dispatchTakePictureIntent()
         }
 
         binding.CardViewBtn2.setOnClickListener {
@@ -103,15 +108,14 @@ class MainMenu : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == RESULT_OK){
-            val photo: Bitmap? = data?.getParcelableExtra<Bitmap>("data")
 
-            val tempUri: Uri? = photo?.let { getImageUri(this, it) }
+            var f : File = File(currentPhotoPath)
+
+            //val tempUri: Uri? = imageBitmap?.let { getImageUri(this, it) }
             val i = Intent(applicationContext,ScanMainActivity::class.java)
 
-            if (tempUri != null) {
-                FirebaseStorageManager().uploadImage(tempUri)
-            }
-            i.putExtra("tempUri",photo)
+                FirebaseStorageManager().uploadImage(Uri.fromFile(f))
+            i.putExtra("tempUri",Uri.fromFile(f))
 
             //run python code here
 
@@ -145,8 +149,12 @@ class MainMenu : AppCompatActivity() {
                                         if (diseaseIndex != null) {
                                             Log.e("test",diseaseIndex)
                                         }
+                                        //covert Uri to bitmap
+                                        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this@MainMenu.getContentResolver(), Uri.parse(
+                                            Uri.fromFile(f).toString()
+                                        ))
 
-                                        imageString = getStringImage(photo)
+                                        imageString = getStringImage(bitmap)
 
                                         //now i imageString we get encoded image string
                                         var py : Python = Python.getInstance()
@@ -171,13 +179,6 @@ class MainMenu : AppCompatActivity() {
         }
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
-        val bytes = ByteArrayOutputStream()
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path =
-            MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
-        return Uri.parse(path)
-    }
 
     private fun getStringImage(path: Bitmap?): String {
         var baos : ByteArrayOutputStream = ByteArrayOutputStream()
@@ -188,6 +189,58 @@ class MainMenu : AppCompatActivity() {
         var encodedImage : String = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return encodedImage
     }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        this,
+                        "com.thanabordeedev.android.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, 101)
+                }
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
+    }
+
+
+
+
 
     override fun onBackPressed() {
     }
