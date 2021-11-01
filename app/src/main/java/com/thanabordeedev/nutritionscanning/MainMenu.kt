@@ -111,10 +111,8 @@ class MainMenu : AppCompatActivity() {
 
             var f : File = File(currentPhotoPath)
 
-            //val tempUri: Uri? = imageBitmap?.let { getImageUri(this, it) }
             val i = Intent(applicationContext,ScanMainActivity::class.java)
-
-                FirebaseStorageManager().uploadImage(Uri.fromFile(f))
+            FirebaseStorageManager().uploadImage(Uri.fromFile(f))
             i.putExtra("tempUri",Uri.fromFile(f))
 
             //run python code here
@@ -125,7 +123,7 @@ class MainMenu : AppCompatActivity() {
             val uid = mauth.currentUser?.uid
 
             mDatabase1 = mDatabase1.child("ScanResult_Data").child(uid!!)
-            fun diseasesReference(): DatabaseReference = mDatabase2.child("Diseases_Data").child(uid!!)
+            fun diseasesReference(): DatabaseReference = mDatabase2.child("Diseases_Data").child(uid)
 
             //Python Script
             if(!Python.isStarted())
@@ -150,7 +148,7 @@ class MainMenu : AppCompatActivity() {
                                             Log.e("test",diseaseIndex)
                                         }
                                         //covert Uri to bitmap
-                                        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this@MainMenu.getContentResolver(), Uri.parse(
+                                        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this@MainMenu.contentResolver, Uri.parse(
                                             Uri.fromFile(f).toString()
                                         ))
 

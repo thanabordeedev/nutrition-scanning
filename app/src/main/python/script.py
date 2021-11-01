@@ -51,14 +51,5 @@ def main(data,discreaseIndex):
         if discreaseResult == "":
             discreaseResult +="5"
 
-    #remove pycache
-    del decoded_data
-    del np_data
-    del img_gray
-    del Intensity_Matrix
-    del contrast_img
-    del reader
-    del result
-
     return discreaseResult
 
