@@ -150,16 +150,16 @@ class MainMenu : AppCompatActivity() {
                                         //covert Uri to bitmap
                                         val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this@MainMenu.contentResolver, Uri.parse(Uri.fromFile(f).toString()))
 
-                                        //imageString = getStringImage(bitmap)
+                                        imageString = getStringImage(bitmap)
 
                                         //now i imageString we get encoded image string
-                                        //var py : Python = Python.getInstance()
-                                        //var pyObj : PyObject = py.getModule("script")
-                                        //var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        //if(obj.toString() != ""){
-                                        //    startActivity(i)
-                                        //    Log.e("Test Result",obj.toString())
-                                        //}
+                                        var py : Python = Python.getInstance()
+                                        var pyObj : PyObject = py.getModule("script")
+                                        var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
+                                        if(obj.toString() != ""){
+                                            startActivity(i)
+                                            Log.e("Test Result",obj.toString())
+                                        }
 
                                     }
                                 )
