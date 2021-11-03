@@ -31,6 +31,7 @@ import java.util.*
 import android.graphics.BitmapFactory
 
 import android.os.ParcelFileDescriptor
+import android.view.View
 import java.io.FileDescriptor
 
 
@@ -57,6 +58,8 @@ class MainMenu : AppCompatActivity() {
 
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.mainMenu?.visibility  = View.VISIBLE
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 111)
@@ -114,7 +117,7 @@ class MainMenu : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == RESULT_OK){
-
+            binding.mainMenu?.visibility = View.INVISIBLE
             var f : File = File(currentPhotoPath)
 
             val i = Intent(applicationContext,ScanMainActivity::class.java)

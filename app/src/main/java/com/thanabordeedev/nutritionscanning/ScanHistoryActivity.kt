@@ -2,6 +2,7 @@ package com.thanabordeedev.nutritionscanning
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class ScanHistoryActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseRef: DatabaseReference
     private lateinit var scanArrayList : ArrayList<ScanResultData>
+    private var maxId : Long = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,11 @@ class ScanHistoryActivity : AppCompatActivity() {
         firebaseRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
+                    maxId = (snapshot.childrenCount)
+
+                    if(maxId > 0){
+                        binding.dataNotFound.visibility = View.INVISIBLE
+                    }
                     for(scanDataSnapshot in snapshot.children){
                         val num = scanDataSnapshot.getValue(ScanResultData::class.java)
                         scanArrayList.add(num!!)
