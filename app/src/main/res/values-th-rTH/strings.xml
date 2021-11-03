@@ -58,4 +58,5 @@
     <string name="time">เวลา :</string>
     <string name="dataNull">N/A</string>
     <string name="text_loading">กำลังโหลดข้อมูล</string>
+    <string name="no_data">ยังไม่มีข้อมูลให้แสดง</string>
 </resources>

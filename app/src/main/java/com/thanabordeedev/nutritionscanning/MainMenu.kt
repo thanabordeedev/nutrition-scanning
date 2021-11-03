@@ -28,6 +28,11 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import android.graphics.BitmapFactory
+
+import android.os.ParcelFileDescriptor
+import java.io.FileDescriptor
+
 
 class MainMenu : AppCompatActivity() {
 
@@ -41,6 +46,7 @@ class MainMenu : AppCompatActivity() {
     private lateinit var mDiseasesData: DiseasesData
     private lateinit var mDatabase1: DatabaseReference
     private lateinit var mDatabase2: DatabaseReference
+
 
     private var maxId : Long = 1
     private var imageString = ""
@@ -148,9 +154,7 @@ class MainMenu : AppCompatActivity() {
                                             Log.e("test",diseaseIndex)
                                         }
                                         //covert Uri to bitmap
-                                        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this@MainMenu.contentResolver, Uri.parse(Uri.fromFile(f).toString()))
-
-                                        imageString = getStringImage(bitmap)
+                                        imageString = getStringImage(getBitmapFromUri(Uri.fromFile(f)))
 
                                         //now i imageString we get encoded image string
                                         var py : Python = Python.getInstance()
@@ -158,6 +162,7 @@ class MainMenu : AppCompatActivity() {
                                         var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
                                         if(obj.toString() != ""){
                                             startActivity(i)
+                                            finish()
                                             Log.e("Test Result",obj.toString())
                                         }
 
@@ -177,14 +182,17 @@ class MainMenu : AppCompatActivity() {
 
 
     private fun getStringImage(path: Bitmap?): String {
+        var sbm : Bitmap? = path?.let { Bitmap.createScaledBitmap(path, it.width/5,it.height/5, true) }
         var baos : ByteArrayOutputStream = ByteArrayOutputStream()
-        path?.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        sbm?.compress(Bitmap.CompressFormat.JPEG,100,baos)
         //store in byte array
         var imageBytes : ByteArray = baos.toByteArray()
         //finally encoded to string
         var encodedImage : String = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return encodedImage
     }
+
+
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -234,8 +242,15 @@ class MainMenu : AppCompatActivity() {
         return Uri.parse(path)
     }
 
-
-
+    @Throws(IOException::class)
+    private fun getBitmapFromUri(uri: Uri): Bitmap {
+        val contentResolver = applicationContext.contentResolver
+        val parcelFileDescriptor: ParcelFileDescriptor? = contentResolver.openFileDescriptor(uri, "r")
+        val fileDescriptor: FileDescriptor? = parcelFileDescriptor?.fileDescriptor
+        val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+        parcelFileDescriptor?.close()
+        return image
+    }
 
 
     override fun onBackPressed() {

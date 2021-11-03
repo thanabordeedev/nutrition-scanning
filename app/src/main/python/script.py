@@ -25,43 +25,43 @@ def main(data,discreaseIndex):
 
     discreaseResult = ""
 
-    #reader = easyocr.Reader(['th'],recog_network='thai_g1')
-    #result = reader.readtext(threshold_img)
-    #for detection in result:
-        #text = detection[1]
-        #discreaseList = discreaseIndex.split()
+    reader = easyocr.Reader(['th'],recog_network='thai_g1')
+    result = reader.readtext(threshold_img)
+    for detection in result:
+        text = detection[1]
+        discreaseList = discreaseIndex.split()
 
-        #text_cut = deepcut.tokenize(text)
+        text_cut = deepcut.tokenize(text)
 
-        #for din in discreaseList:
-            #for index in range(len(text_cut)):
-                #if din == 1:
-                    #if text_cut[index] == "น้ำตาล":
-                        #discreaseResult +="1"
-                #elif din == 2:
-                    #if text_cut[index] == "โซเดียม":
-                        #discreaseResult +="2"
-                #elif din == 3:
-                    #if text_cut[index] == "ถั่วเหลือง":
-                        #discreaseResult +="3"
-                #elif din == 4:
-                    #if text_cut[index] == "ทะเล":
-                        #discreaseResult +="4"
+        for din in discreaseList:
+            for index in range(len(text_cut)):
+                if din == 1:
+                    if text_cut[index] == "น้ำตาล":
+                        discreaseResult +="1"
+                elif din == 2:
+                    if text_cut[index] == "โซเดียม":
+                        discreaseResult +="2"
+                elif din == 3:
+                    if text_cut[index] == "ถั่วเหลือง":
+                        discreaseResult +="3"
+                elif din == 4:
+                    if text_cut[index] == "ทะเล":
+                        discreaseResult +="4"
 
-        #if discreaseResult == "":
-            #discreaseResult +="5"
+        if discreaseResult == "":
+            discreaseResult +="5"
 
 	#remove pycache
-    #del decoded_data
-    #del np_data
-    #del img_gray
-    #del Intensity_Matrix
-    #del contrast_img
-    #del reader
-    #del result
+    del decoded_data
+    del np_data
+    del img_gray
+    del Intensity_Matrix
+    del contrast_img
+    del reader
+    del result
 
-    if discreaseResult == "":
-        discreaseResult +="5"
+    #if discreaseResult == "":
+        #discreaseResult +="5"
 
     return discreaseResult
 
