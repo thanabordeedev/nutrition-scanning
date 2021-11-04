@@ -32,6 +32,11 @@ import android.graphics.BitmapFactory
 
 import android.os.ParcelFileDescriptor
 import android.view.View
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.document.FirebaseVisionDocumentText
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer
 import java.io.FileDescriptor
 
 
@@ -60,6 +65,10 @@ class MainMenu : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.mainMenu?.visibility  = View.VISIBLE
+        binding.mainMenuProgressBar?.visibility = View.INVISIBLE
+        //land
+        binding.mainMenuLand?.visibility  = View.VISIBLE
+        binding.mainMenuProgressBarLand?.visibility = View.INVISIBLE
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 111)
@@ -118,11 +127,16 @@ class MainMenu : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == RESULT_OK){
             binding.mainMenu?.visibility = View.INVISIBLE
+            binding.mainMenuProgressBar?.visibility = View.VISIBLE
+            //land
+            binding.mainMenuLand?.visibility = View.INVISIBLE
+            binding.mainMenuProgressBarLand?.visibility = View.VISIBLE
             var f : File = File(currentPhotoPath)
 
             val i = Intent(applicationContext,ScanMainActivity::class.java)
             FirebaseStorageManager().uploadImage(Uri.fromFile(f))
             i.putExtra("tempUri",Uri.fromFile(f))
+
 
             //run python code here
 
@@ -156,18 +170,49 @@ class MainMenu : AppCompatActivity() {
                                         if (diseaseIndex != null) {
                                             Log.e("test",diseaseIndex)
                                         }
+
+                                        //detection image
+
+                                        var fileBaseVisionImage : FirebaseVisionImage = FirebaseVisionImage.fromFilePath(this@MainMenu,
+                                            Uri.fromFile(f))
+                                        var fileBaseVisionTextDetector : FirebaseVisionTextRecognizer= FirebaseVision.getInstance().cloudTextRecognizer
+                                        val scanVisionResult = fileBaseVisionTextDetector.processImage(fileBaseVisionImage).addOnSuccessListener { visionText ->
+                                            val resultText = visionText.text
+                                            for (block in visionText.textBlocks) {
+                                                val blockText = block.text
+                                                val blockCornerPoints = block.cornerPoints
+                                                val blockFrame = block.boundingBox
+                                                for (line in block.lines) {
+                                                    val lineText = line.text
+                                                    val lineCornerPoints = line.cornerPoints
+                                                    val lineFrame = line.boundingBox
+                                                    for (element in line.elements) {
+                                                        val elementText = element.text
+                                                        val elementCornerPoints = element.cornerPoints
+                                                        val elementFrame = element.boundingBox
+                                                    }
+                                                }
+                                            }
+                                            Log.e("result text",resultText)
+                                        }.addOnFailureListener { e ->
+                                            // Task failed with an exception
+                                            // ...
+                                        }
+
+
+
+
                                         //covert Uri to bitmap
                                         imageString = getStringImage(getBitmapFromUri(Uri.fromFile(f)))
 
                                         //now i imageString we get encoded image string
-                                        var py : Python = Python.getInstance()
-                                        var pyObj : PyObject = py.getModule("script")
-                                        var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        if(obj.toString() != ""){
-                                            startActivity(i)
-                                            finish()
-                                            Log.e("Test Result",obj.toString())
-                                        }
+                                        //var py : Python = Python.getInstance()
+                                        //var pyObj : PyObject = py.getModule("script")
+                                        //var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
+                                        //if(obj.toString() != ""){
+                                        //    startActivity(i)
+                                        //    Log.e("Test Result",obj.toString())
+                                        //}
 
                                     }
                                 )
@@ -259,3 +304,5 @@ class MainMenu : AppCompatActivity() {
     override fun onBackPressed() {
     }
 }
+
+
