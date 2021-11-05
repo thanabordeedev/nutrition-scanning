@@ -6,7 +6,9 @@ def main(data,discreaseIndex):
 
     discreaseList = discreaseIndex.split()
 
-    text_cut = deepcut.tokenize(data)
+    datasplit = data.split("\n")
+
+    text_cut = deepcut.tokenize(datasplit)
 
     for din in discreaseList:
         for index in range(len(text_cut)):

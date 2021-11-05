@@ -136,7 +136,7 @@ class MainMenu : AppCompatActivity() {
             var f : File = File(currentPhotoPath)
 
             val i = Intent(applicationContext,ScanMainActivity::class.java)
-            FirebaseStorageManager().uploadImage(Uri.fromFile(f))
+            FirebaseStorageManager().uploadImage(resizeImageUri(this,Uri.fromFile(f)))
             i.putExtra("tempUri",Uri.fromFile(f))
 
 
@@ -189,7 +189,7 @@ class MainMenu : AppCompatActivity() {
                                                     longtext += text
 
                                                 }
-                                                //Log.e("result text",longtext)
+                                                Log.e("result text",longtext)
 
                                                 //now i imageString we get encoded image string
                                                 var py : Python = Python.getInstance()
@@ -230,6 +230,22 @@ class MainMenu : AppCompatActivity() {
         //finally encoded to string
         var encodedImage : String = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return encodedImage
+    }
+
+    private fun resizeImageUri(inContext: Context,uri: Uri): Uri {
+        val contentResolver = applicationContext.contentResolver
+        val parcelFileDescriptor: ParcelFileDescriptor? =
+            contentResolver.openFileDescriptor(uri, "r")
+        val fileDescriptor: FileDescriptor? = parcelFileDescriptor?.fileDescriptor
+        val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+        parcelFileDescriptor?.close()
+        val bytes = ByteArrayOutputStream()
+        image?.let { Bitmap.createScaledBitmap(image, it.width / 10, it.height / 10, true) }
+            ?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(inContext.contentResolver, image, "Title", null)
+        return Uri.parse(path)
+
     }
 
 
@@ -291,6 +307,8 @@ class MainMenu : AppCompatActivity() {
         parcelFileDescriptor?.close()
         return image
     }
+
+
 
 
     override fun onBackPressed() {
