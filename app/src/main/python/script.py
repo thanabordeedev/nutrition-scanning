@@ -6,27 +6,26 @@ def main(data,discreaseIndex):
 
     discreaseList = discreaseIndex.split()
 
-    datasplit = data.split("\n")
+    textloop = ""
 
-    text_cut = deepcut.tokenize(datasplit)
+    text_cut = deepcut.tokenize(data)
 
-    for din in discreaseList:
+    for din in range(len(discreaseList)):
         for index in range(len(text_cut)):
-            if din == 1:
+            #textloop += text_cut[index] + "|"
+            if discreaseList[din] == "1":
                 if text_cut[index] == "ตาล" or text_cut[index] == "น้ำตาล":
                     discreaseResult +="1"
-            elif din == 2:
-                if text_cut[index] == "โซเดียม":
+            elif discreaseList[din] == "2":
+                if text_cut[index] == "โซเดียม" or text_cut[index] == "โขเดียม":
                     discreaseResult +="2"
-            elif din == 3:
-                if text_cut[index] == "ถั่วเหลือง" or text_cut[index] == "ถัวเหลือง":
+            elif discreaseList[din] == "3":
+                if text_cut[index] == "ถั่วเหลือง" or text_cut[index] == "ถัวเหลือง" or text_cut[index] == "ถัว" or text_cut[index] == "เหลือง":
                     discreaseResult +="3"
-            elif din == 4:
+            elif discreaseList[din] == "4":
                 if text_cut[index] == "ทะเล":
                     discreaseResult +="4"
-
-    if discreaseResult == "":
-        discreaseResult +="5"
+        
 
     return discreaseResult
 

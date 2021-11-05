@@ -34,6 +34,9 @@ class ScanMainActivity : AppCompatActivity() {
         val path = intent.getParcelableExtra<Uri>("tempUri")
         binding.surfaceCameraPreview.setImageURI(path)
 
+        val dr = intent.getStringExtra("dr")
+        binding.textCanEatOrNot.text = dr
+
         //backward to MainMenu
         binding.textViewOkBtn.setOnClickListener {
             val intent = Intent(binding.textViewOkBtn.context,MainMenu::class.java)

@@ -136,7 +136,7 @@ class MainMenu : AppCompatActivity() {
             var f : File = File(currentPhotoPath)
 
             val i = Intent(applicationContext,ScanMainActivity::class.java)
-            FirebaseStorageManager().uploadImage(resizeImageUri(this,Uri.fromFile(f)))
+            FirebaseStorageManager().uploadImage(Uri.fromFile(f))
             i.putExtra("tempUri",Uri.fromFile(f))
 
 
@@ -196,8 +196,9 @@ class MainMenu : AppCompatActivity() {
                                                 var pyObj : PyObject = py.getModule("script")
                                                 var obj = pyObj.callAttr("main",longtext,mDiseasesData.diseaseIndex)
                                                 if(obj.toString() != ""){
+                                                    Log.e("test result",obj.toString())
+                                                    i.putExtra("dr",obj.toString())
                                                     startActivity(i)
-                                                    Log.e("Test Result",obj.toString())
                                                 }
                                             }
 
@@ -232,7 +233,7 @@ class MainMenu : AppCompatActivity() {
         return encodedImage
     }
 
-    private fun resizeImageUri(inContext: Context,uri: Uri): Uri {
+    /*private fun resizeImageUri(inContext: Context,uri: Uri): Uri {
         val contentResolver = applicationContext.contentResolver
         val parcelFileDescriptor: ParcelFileDescriptor? =
             contentResolver.openFileDescriptor(uri, "r")
@@ -240,13 +241,13 @@ class MainMenu : AppCompatActivity() {
         val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
         parcelFileDescriptor?.close()
         val bytes = ByteArrayOutputStream()
-        image?.let { Bitmap.createScaledBitmap(image, it.width / 10, it.height / 10, true) }
+        image?.let { Bitmap.createScaledBitmap(image, it.width / 50, it.height / 50, true) }
             ?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path =
             MediaStore.Images.Media.insertImage(inContext.contentResolver, image, "Title", null)
         return Uri.parse(path)
 
-    }
+    }*/
 
 
 
