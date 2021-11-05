@@ -47,6 +47,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="text_input_field_all">Please input all field.</string>
+    <string name="no_text_found">No text found in this image</string>
     <!-- Strings used for ScanMainActivity -->
     <string name="text_scan_result">Scan Result</string>
     <string name="text_scan_result2">Scan Result Data</string>

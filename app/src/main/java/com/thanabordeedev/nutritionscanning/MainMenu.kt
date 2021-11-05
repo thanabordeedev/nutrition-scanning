@@ -32,10 +32,12 @@ import android.graphics.BitmapFactory
 
 import android.os.ParcelFileDescriptor
 import android.view.View
+import android.widget.Toast
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.document.FirebaseVisionDocumentText
+import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer
 import java.io.FileDescriptor
 
@@ -172,47 +174,37 @@ class MainMenu : AppCompatActivity() {
                                         }
 
                                         //detection image
+                                        var longtext : String = ""
 
                                         var fileBaseVisionImage : FirebaseVisionImage = FirebaseVisionImage.fromFilePath(this@MainMenu,
                                             Uri.fromFile(f))
                                         var fileBaseVisionTextDetector : FirebaseVisionTextRecognizer= FirebaseVision.getInstance().cloudTextRecognizer
                                         val scanVisionResult = fileBaseVisionTextDetector.processImage(fileBaseVisionImage).addOnSuccessListener { visionText ->
-                                            val resultText = visionText.text
-                                            for (block in visionText.textBlocks) {
-                                                val blockText = block.text
-                                                val blockCornerPoints = block.cornerPoints
-                                                val blockFrame = block.boundingBox
-                                                for (line in block.lines) {
-                                                    val lineText = line.text
-                                                    val lineCornerPoints = line.cornerPoints
-                                                    val lineFrame = line.boundingBox
-                                                    for (element in line.elements) {
-                                                        val elementText = element.text
-                                                        val elementCornerPoints = element.cornerPoints
-                                                        val elementFrame = element.boundingBox
-                                                    }
+                                            var blocklist : List<FirebaseVisionText.TextBlock> = visionText.textBlocks
+                                            if(blocklist.isEmpty()){
+                                                Toast.makeText(this@MainMenu,R.string.no_text_found,Toast.LENGTH_SHORT).show()
+                                            } else {
+                                                for (block : FirebaseVisionText.TextBlock in visionText.textBlocks ){
+                                                    var text : String = block.text
+                                                    longtext += text
+
+                                                }
+                                                //Log.e("result text",longtext)
+
+                                                //now i imageString we get encoded image string
+                                                var py : Python = Python.getInstance()
+                                                var pyObj : PyObject = py.getModule("script")
+                                                var obj = pyObj.callAttr("main",longtext,mDiseasesData.diseaseIndex)
+                                                if(obj.toString() != ""){
+                                                    startActivity(i)
+                                                    Log.e("Test Result",obj.toString())
                                                 }
                                             }
-                                            Log.e("result text",resultText)
+
                                         }.addOnFailureListener { e ->
                                             // Task failed with an exception
                                             // ...
                                         }
-
-
-
-
-                                        //covert Uri to bitmap
-                                        imageString = getStringImage(getBitmapFromUri(Uri.fromFile(f)))
-
-                                        //now i imageString we get encoded image string
-                                        //var py : Python = Python.getInstance()
-                                        //var pyObj : PyObject = py.getModule("script")
-                                        //var obj = pyObj.callAttr("main",imageString,mDiseasesData.diseaseIndex)
-                                        //if(obj.toString() != ""){
-                                        //    startActivity(i)
-                                        //    Log.e("Test Result",obj.toString())
-                                        //}
 
                                     }
                                 )

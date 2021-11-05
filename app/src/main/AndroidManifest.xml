@@ -69,7 +69,12 @@
         <activity
             android:name=".MainMenu"
             android:exported="true"
-            android:theme="@style/Theme.NutritionScanning.NoActionBar" />
+            android:theme="@style/Theme.NutritionScanning.NoActionBar" >
+
+            <meta-data
+                android:name="com.google.mlkit.vision.DEPENDENCIES"
+                android:value="ocr" />
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="true"

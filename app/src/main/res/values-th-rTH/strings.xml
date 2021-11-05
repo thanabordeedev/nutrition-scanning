@@ -59,4 +59,5 @@
     <string name="dataNull">N/A</string>
     <string name="text_loading">กำลังโหลดข้อมูล</string>
     <string name="no_data">ยังไม่มีข้อมูลให้แสดง</string>
+    <string name="no_text_found">ไม่มีตัวอักษรใดอยู่เลยในภาพนี้</string>
 </resources>
