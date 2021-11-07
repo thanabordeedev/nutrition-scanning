@@ -187,40 +187,36 @@ class MainMenu : AppCompatActivity() {
                                                 for (block : FirebaseVisionText.TextBlock in visionText.textBlocks ){
                                                     var text : String = block.text
                                                     longtext += text
-
                                                 }
-                                                Log.e("result text",longtext)
 
                                                 //now i imageString we get encoded image string
                                                 var py : Python = Python.getInstance()
                                                 var pyObj : PyObject = py.getModule("script")
-                                                var obj = pyObj.callAttr("main",longtext,mDiseasesData.diseaseIndex)
-                                                if(obj.toString() != "9"){
-                                                    Log.e("test result",obj.toString())
-                                                    i.putExtra("dr",obj.toString())
-                                                    startActivity(i)
-                                                }
-                                            }
+                                                var obj = pyObj.callAttr("main",longtext)
+                                                Log.e("test result",obj.toString())
 
+                                                //loop checked
+
+
+                                                i.putExtra("dr",obj.toString())
+                                                startActivity(i)
+                                                finish()
+                                            }
                                         }.addOnFailureListener { e ->
                                             // Task failed with an exception
                                             // ...
                                         }
-
                                     }
                                 )
                             }
                         )
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
-
         }
     }
-
 
     private fun getStringImage(path: Bitmap?): String {
         var sbm : Bitmap? = path?.let { Bitmap.createScaledBitmap(path, it.width/5,it.height/5, true) }
@@ -232,24 +228,6 @@ class MainMenu : AppCompatActivity() {
         var encodedImage : String = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return encodedImage
     }
-
-    /*private fun resizeImageUri(inContext: Context,uri: Uri): Uri {
-        val contentResolver = applicationContext.contentResolver
-        val parcelFileDescriptor: ParcelFileDescriptor? =
-            contentResolver.openFileDescriptor(uri, "r")
-        val fileDescriptor: FileDescriptor? = parcelFileDescriptor?.fileDescriptor
-        val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
-        parcelFileDescriptor?.close()
-        val bytes = ByteArrayOutputStream()
-        image?.let { Bitmap.createScaledBitmap(image, it.width / 50, it.height / 50, true) }
-            ?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path =
-            MediaStore.Images.Media.insertImage(inContext.contentResolver, image, "Title", null)
-        return Uri.parse(path)
-
-    }*/
-
-
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -308,9 +286,6 @@ class MainMenu : AppCompatActivity() {
         parcelFileDescriptor?.close()
         return image
     }
-
-
-
 
     override fun onBackPressed() {
     }
