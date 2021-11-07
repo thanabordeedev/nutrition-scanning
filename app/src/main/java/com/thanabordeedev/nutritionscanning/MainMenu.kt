@@ -195,7 +195,7 @@ class MainMenu : AppCompatActivity() {
                                                 var py : Python = Python.getInstance()
                                                 var pyObj : PyObject = py.getModule("script")
                                                 var obj = pyObj.callAttr("main",longtext,mDiseasesData.diseaseIndex)
-                                                if(obj.toString() != ""){
+                                                if(obj.toString() != "9"){
                                                     Log.e("test result",obj.toString())
                                                     i.putExtra("dr",obj.toString())
                                                     startActivity(i)
