@@ -197,7 +197,7 @@ class MainMenu : AppCompatActivity() {
 
                                                 //loop checked
                                                 val diseaseIndexList: List<String>? = diseaseIndex?.split("")
-
+                                                //test
 
                                                 //i.putExtra("dr",obj.toString())
                                                 startActivity(i)
