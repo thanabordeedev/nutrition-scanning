@@ -196,9 +196,10 @@ class MainMenu : AppCompatActivity() {
                                                 Log.e("test result",obj.toString())
 
                                                 //loop checked
+                                                val diseaseIndexList: List<String>? = diseaseIndex?.split("")
 
 
-                                                i.putExtra("dr",obj.toString())
+                                                //i.putExtra("dr",obj.toString())
                                                 startActivity(i)
                                                 finish()
                                             }
