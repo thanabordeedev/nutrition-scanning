@@ -17,5 +17,8 @@ def main(data):
         elif text_cut[index] == "ทะเล":
                 discreaseResult = discreaseResult+"4"
 
+    #split text again
+        
+
     return discreaseResult
 

@@ -198,8 +198,8 @@ class MainMenu : AppCompatActivity() {
                                                 val scanIndex = obj.toString()
 
                                                 //loop checked
-                                                val diseaseIndexList: List<String>? = diseaseIndex?.split("")
-                                                val scanIndexList: List<String>? = scanIndex?.split("")
+                                                //val diseaseIndexList: List<String>? = diseaseIndex?.split("")
+                                                //val scanIndexList: List<String>? = scanIndex?.split("")
 
 
                                                 //i.putExtra("dr",obj.toString())
