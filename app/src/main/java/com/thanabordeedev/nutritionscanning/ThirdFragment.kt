@@ -50,16 +50,16 @@ class ThirdFragment : Fragment(){
 
             var choice = ""
             if(binding.TextViewQuestionChb1.isChecked){
-                choice += 1
+                choice += "1#"
             }
             if(binding.TextViewQuestionChb2.isChecked){
-                choice += 2
+                choice += "2#"
             }
             if(binding.TextViewQuestionChb3.isChecked){
-                choice += 3
+                choice += "3#"
             }
             if(binding.TextViewQuestionChb4.isChecked){
-                choice += 4
+                choice += "4#"
             }
 
             val diseases = DiseasesData(choice)
