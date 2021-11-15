@@ -33,18 +33,15 @@ class ThirdFragment : Fragment(){
 
         _binding = FragmentThirdBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         auth = FirebaseAuth.getInstance()
         databaseReference = Firebase.database.reference
         val uid = auth.currentUser?.uid
         databaseReference = FirebaseDatabase.getInstance().getReference("Diseases_Data")
-
 
         binding.textViewQuestionOkBtn.setOnClickListener {
 
@@ -74,14 +71,9 @@ class ThirdFragment : Fragment(){
         }
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 
 }
