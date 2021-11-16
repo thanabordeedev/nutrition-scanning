@@ -4,8 +4,6 @@ def main(data,disIndex):
 
     discreaseResult = ""
 
-    disIndex2 = str(disIndex)
-
     text_cut = deepcut.tokenize(data)
 
     #pass
@@ -22,25 +20,14 @@ def main(data,disIndex):
     #split text again
     discreaseResultList = discreaseResult.split()
 
-    discreaseResultchk = ""
+    #check duplicate number
+    discreaseResultList = discreaseResult.split('#')
+    discreaseIndexList = disIndex.split('#')
 
-    disIndexList = disIndex2.split()
-     
-    for dil in range(len(disIndexList)):
-        for drl in range(len(discreaseResultList)):
-                if disIndexList[dil] == "1":
-                        if discreaseResultList[drl] == "1":
-                                discreaseResultchk = discreaseResultchk + "1"
-                elif disIndexList[dil] == "2":
-                        if discreaseResultList[drl] == "2":
-                                discreaseResultchk = discreaseResultchk + "2"
-                elif disIndexList[dil] == "3":
-                        if discreaseResultList[drl] == "3":
-                                discreaseResultchk = discreaseResultchk + "3"
-                elif disIndexList[dil] == "4":
-                        if discreaseResultList[drl] == "4":
-                                discreaseResultchk = discreaseResultchk + "4"
+    countlist = []
+
+    
                 
 
-    return discreaseResultchk
+    return discreaseResult
 
