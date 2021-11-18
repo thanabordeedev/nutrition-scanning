@@ -60,4 +60,8 @@
     <string name="text_loading">กำลังโหลดข้อมูล</string>
     <string name="no_data">ยังไม่มีข้อมูลให้แสดง</string>
     <string name="no_text_found">ไม่มีตัวอักษรใดอยู่เลยในภาพนี้</string>
+    <string name="has_sodium">มีโซเดียม</string>
+    <string name="has_sugar">มีน้ำตาล</string>
+    <string name="has_soybean">มีถั่วเหลือง</string>
+    <string name="has_seafood">มีส่วนประกอบของอาหารทะเล</string>
 </resources>

@@ -35,7 +35,26 @@ class ScanMainActivity : AppCompatActivity() {
         binding.surfaceCameraPreview.setImageURI(path)
 
         val dr = intent.getStringExtra("dr")
-        binding.textCanEatOrNot.text = dr
+
+        val drSplit = dr?.split("")
+        var drText = ""
+
+        drSplit?.forEach {
+            if(it == "1"){
+                drText = drText + R.string.has_sugar + "\n"
+            }
+            else if (it == "2"){
+                drText = drText + R.string.has_sodium + "\n"
+            }
+            else if (it == "3"){
+                drText = drText + R.string.has_soybean + "\n"
+            }
+            else if (it == "4"){
+                drText = drText + R.string.has_seafood + "\n"
+            }
+        }
+
+        binding.textCanEatOrNot.text = drText
 
         //backward to MainMenu
         binding.textViewOkBtn.setOnClickListener {

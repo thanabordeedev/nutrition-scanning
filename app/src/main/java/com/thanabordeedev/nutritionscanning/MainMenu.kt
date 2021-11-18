@@ -195,13 +195,6 @@ class MainMenu : AppCompatActivity() {
                                                 var obj = pyObj.callAttr("main",longtext,diseaseIndex)
                                                 Log.e("test result",obj.toString())
 
-                                                //val scanIndex = obj.toString()
-
-                                                //loop checked
-                                                //val diseaseIndexList: List<String>? = diseaseIndex?.split("")
-                                                //val scanIndexList: List<String>? = scanIndex?.split("")
-
-
                                                 i.putExtra("dr",obj.toString())
                                                 startActivity(i)
                                                 finish()
