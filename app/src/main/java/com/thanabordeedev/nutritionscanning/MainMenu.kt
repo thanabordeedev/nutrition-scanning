@@ -197,7 +197,8 @@ class MainMenu : AppCompatActivity() {
 
                                                 i.putExtra("dr",obj.toString())
                                                 startActivity(i)
-                                                finish()
+                                                onBackPressed()
+                                                onStop()
                                             }
                                         }.addOnFailureListener { e ->
                                             // Task failed with an exception
