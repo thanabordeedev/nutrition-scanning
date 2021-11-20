@@ -80,7 +80,7 @@ class ScanMainActivity : AppCompatActivity() {
 
         //backward to MainMenu
         binding.textViewOkBtn.setOnClickListener {
-            updateData(dr.toString())
+            updateData(drText)
             val intent = Intent(binding.textViewOkBtn.context,MainMenu::class.java)
             binding.textViewOkBtn.context.startActivity(intent)
             finish()
