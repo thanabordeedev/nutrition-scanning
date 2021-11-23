@@ -141,7 +141,6 @@ class MainMenu : AppCompatActivity() {
 
 
             //run python code here
-
             mauth = FirebaseAuth.getInstance()
             mDatabase1 = FirebaseDatabase.getInstance().reference
             mDatabase2 = FirebaseDatabase.getInstance().reference
@@ -169,9 +168,6 @@ class MainMenu : AppCompatActivity() {
                                     ValueListenerAdapter{
                                         mDiseasesData = it.asDiseasesData()!!
                                         val diseaseIndex = mDiseasesData.diseaseIndex
-                                        if (diseaseIndex != null) {
-                                            Log.e("test",diseaseIndex)
-                                        }
 
                                         //detection image
                                         var longtext : String = ""
@@ -193,7 +189,6 @@ class MainMenu : AppCompatActivity() {
                                                 var py : Python = Python.getInstance()
                                                 var pyObj : PyObject = py.getModule("script")
                                                 var obj = pyObj.callAttr("main",longtext,diseaseIndex)
-                                                Log.e("test result",obj.toString())
 
                                                 i.putExtra("dr",obj.toString())
                                                 startActivity(i)
