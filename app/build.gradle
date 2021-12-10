@@ -19,18 +19,18 @@ android {
         python{
 
             pip{
-                install "opencv-contrib-python-headless"
-                install "easyocr"
-                install "numpy"
+                //install "opencv-contrib-python-headless"
+               // install "easyocr"
+               // install "numpy"
                 //pytorch
-                install "torch"
-                install "torchvision"
+                //install "torch"
+                //install "torchvision"
                 //matplotlib
-                install "matplotlib"
+                //install "matplotlib"
                 //Thai Text cut
-                install "tensorflow"
+                //install "tensorflow"
                 install "deepcut"
-                install "Pillow"
+                //install "Pillow"
                 //problem
             }
 
@@ -87,7 +87,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
-    implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
+    implementation 'com.google.firebase:firebase-ml-vision:'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
