@@ -262,7 +262,7 @@ class MainMenu : AppCompatActivity() {
         }
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+    /*fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
         val bytes = ByteArrayOutputStream()
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path =
@@ -278,7 +278,7 @@ class MainMenu : AppCompatActivity() {
         val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
         parcelFileDescriptor?.close()
         return image
-    }
+    }*/
 
     override fun onBackPressed() {
     }

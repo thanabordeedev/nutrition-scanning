@@ -25,9 +25,6 @@ def main(data,disIndex):
 
     countlist = [0,0,0,0]
 
-    #for clf in range(len(discreaseResultList)):
-    #    countlist.append(0)
-
     for drl in range(len(discreaseResultList)):
         if discreaseResultList[drl] == '':
                 discreaseResultList[drl] = '0'
